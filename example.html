@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Betterstring.js Example</title>
+    <script src="betterstring.js"></script>
+</head>
+<body>
+    <p>Example 1:</p>
+    <pre>
+        str = "{ adult_count } adult(s)({adult_count}), { room_count } roo(m,ms)({ room_count})."
+
+        str = str.render({
+            'adult_count': 2,
+            'room_count': 1
+        })
+
+        str = str.pluralize()
+
+        str => 2 adult, 1 rooms.
+    </pre>
+    <div id="ex1"></div>
+
+    <script>
+    /* Example 1 */
+    var set = function(elm, content) {
+        document.getElementById(elm).innerHTML=content;
+    };
+
+    var ex1 = "{ adult_count } adult(s)({adult_count}), { room_count } roo(m,ms)({ room_count}).".render({
+        'adult_count': 2,
+        'room_count': 1
+    }).pluralize();
+
+    set("ex1", ex1);
+    </script>
+
+    <p>Example 2:</p>
+    <div><input type="number" oninput="exec_ex2(this)" id="num" placeholder="Put a number here..."> &nbsp; <span id="ex2"></span></div>
+    <script>
+    /* Example 2 */
+    var exec_ex2 = function(elm) {
+        var v = parseInt(elm.value);
+        if(!isNaN(v)) {
+            set("ex2", "{ number } is (singular,plural)({ number })".render({
+                'number': v
+            }).pluralize());
+        }
+    };
+    exec_ex2(document.getElementById("num"));
+
+    </script>
+
+</body>
+</html>
